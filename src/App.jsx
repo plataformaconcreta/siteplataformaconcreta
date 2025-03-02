@@ -47,7 +47,7 @@ function App() {
   const companies = [
     {
       name: 'LOGNOW',
-      logo: 'https://plataformaconcreta.pt/logos/lognow/logo.png',
+      logo: '/logos/lognow.svg',
       description: 'Rentabilize o seu Negócio com Serviços de Envio. Torne-se um Revendedor Autorizado de Serviços CTT, GLS e VASP.',
       color: COLORS.navy,
       highlight: 'Mais de 500 pontos de entrega em Portugal'
@@ -424,13 +424,13 @@ function App() {
                           case 'LOGNOW':
                             return `linear-gradient(135deg, ${COLORS.cardNavy} 0%, ${COLORS.navy} 100%)`;
                           case 'SHIPPIX':
-                            return COLORS.white;
+                            return COLORS.novixBg;
                           case 'SOUESPIRITA':
-                            return `linear-gradient(135deg, ${COLORS.lime} 0%, ${COLORS.cardLime} 100%)`;
+                            return COLORS.white;
                           case 'NOVIX CRM':
-                            return COLORS.white;
+                            return `linear-gradient(135deg, ${COLORS.cardNavy} 0%, ${COLORS.navy} 100%)`;
                           default:
-                            return COLORS.white;
+                            return COLORS.novixBg;
                         }
                       })(),
                       '&::after': {
@@ -440,7 +440,7 @@ function App() {
                         left: '10%',
                         width: '80%',
                         height: '1px',
-                        background: `linear-gradient(to right, transparent, ${company.name === 'LOGNOW' ? COLORS.white : COLORS.navy}20, transparent)`
+                        background: `linear-gradient(to right, transparent, ${COLORS.navy}20, transparent)`
                       }
                     }}
                   >
@@ -452,7 +452,7 @@ function App() {
                         maxWidth: '60%',
                         objectFit: 'contain',
                         transition: 'transform 0.3s ease',
-                        filter: company.name === 'LOGNOW' ? 'brightness(0) invert(1)' : 'none'
+                        filter: 'none'
                       }}
                     />
                     <Box
@@ -461,20 +461,7 @@ function App() {
                         bottom: 0,
                         left: 0,
                         right: 0,
-                        background: (() => {
-                          switch(company.name) {
-                            case 'LOGNOW':
-                              return `linear-gradient(to right, ${COLORS.navy}CC, ${COLORS.cardNavy}CC)`;
-                            case 'SHIPPIX':
-                              return `linear-gradient(to right, ${COLORS.navy}CC, ${COLORS.cardNavy}CC)`;
-                            case 'SOUESPIRITA':
-                              return `linear-gradient(to right, ${COLORS.cardLime}CC, ${COLORS.lime}CC)`;
-                            case 'NOVIX CRM':
-                              return `linear-gradient(to right, ${COLORS.navy}CC, ${COLORS.cardNavy}CC)`;
-                            default:
-                              return `${COLORS.navy}CC`;
-                          }
-                        })(),
+                        background: `linear-gradient(to right, ${COLORS.navy}CC, ${COLORS.cardNavy}CC)`,
                         py: 1.5,
                         px: 3,
                         backdropFilter: 'blur(4px)',
@@ -486,7 +473,7 @@ function App() {
                       <Typography
                         variant="subtitle2"
                         sx={{
-                          color: company.name === 'SOUESPIRITA' ? COLORS.navy : COLORS.white,
+                          color: COLORS.white,
                           fontWeight: 500,
                           textAlign: 'center',
                           fontSize: '0.875rem',
@@ -511,20 +498,7 @@ function App() {
                       component="h3"
                       sx={{ 
                         fontWeight: 600,
-                        color: (() => {
-                          switch(company.name) {
-                            case 'LOGNOW':
-                              return COLORS.navy;
-                            case 'SHIPPIX':
-                              return COLORS.navy;
-                            case 'SOUESPIRITA':
-                              return COLORS.lime;
-                            case 'NOVIX CRM':
-                              return COLORS.navy;
-                            default:
-                              return COLORS.navy;
-                          }
-                        })(),
+                        color: COLORS.navy,
                         mb: 2,
                         fontSize: '1.25rem',
                         letterSpacing: '0.5px',
@@ -536,7 +510,7 @@ function App() {
                           left: 0,
                           width: 40,
                           height: 2,
-                          background: company.color,
+                          background: COLORS.navy,
                           transition: 'width 0.3s ease'
                         }
                       }}
