@@ -54,7 +54,7 @@ function App() {
     },
     {
       name: 'SHIPPIX',
-      logo: '/logos/shippix.png',
+      logo: './logos/shippix.png',
       description: 'A sua solução de logística local no Porto e em todo o país. Serviços personalizados e eficientes para todas as suas necessidades de envio.',
       color: COLORS.lime,
       highlight: 'Entregas em 24h no Grande Porto'
