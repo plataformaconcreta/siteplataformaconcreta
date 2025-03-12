@@ -19,7 +19,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu'
 import PhoneIcon from '@mui/icons-material/Phone'
 import EmailIcon from '@mui/icons-material/Email'
-import shippixLogo from '/logos/shippix.png';
+import shippixLogo from './assets/shippix.png';
 
 const COLORS = {
   navy: '#002B5C',
