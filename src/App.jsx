@@ -19,6 +19,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu'
 import PhoneIcon from '@mui/icons-material/Phone'
 import EmailIcon from '@mui/icons-material/Email'
+import shippixLogo from '../public/logos/shippix.png';
 
 const COLORS = {
   navy: '#002B5C',
@@ -54,7 +55,7 @@ function App() {
     },
     {
       name: 'SHIPPIX',
-      logo: '/logos/shippix.png',
+      logo: shippixLogo,
       description: 'A sua solução de logística local no Porto e em todo o país. Serviços personalizados e eficientes para todas as suas necessidades de envio.',
       color: COLORS.lime,
       highlight: 'Entregas em 24h no Grande Porto'
