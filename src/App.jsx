@@ -29,9 +29,7 @@ const COLORS = {
   mediumGray: '#546E7A',
   white: '#FFFFFF',
   cardNavy: '#0A3665',
-  cardLime: '#B8CC21',
-  souespiritaBg: '#C5D92D',  
-  novixBg: '#FFFFFF'         
+  cardLime: '#B8CC21'
 }
 
 function App() {
@@ -47,37 +45,15 @@ function App() {
   const companies = [
     {
       name: 'LOGNOW',
-      logo: '/logos/lognow.svg',
+      logo: '/logos/lognow.png',
       description: 'Rentabilize o seu Negócio com Serviços de Envio. Torne-se um Revendedor Autorizado de Serviços CTT, GLS e VASP.',
-      color: COLORS.navy,
       highlight: 'Mais de 500 pontos de entrega em Portugal'
-    },
-    {
-      name: 'SHIPPIX',
-      logo: '/logos/shippix.png',
-      description: 'A sua solução de logística local no Porto e em todo o país. Serviços personalizados e eficientes para todas as suas necessidades de envio.',
-      color: COLORS.lime,
-      highlight: 'Entregas em 24h no Grande Porto'
-    },
-    {
-      name: 'SOUESPIRITA',
-      logo: '/logos/souespirita.svg',
-      description: 'A sua loja esotérica de confiança.',
-      color: COLORS.navy,
-      highlight: 'Mais de 1000 produtos esotéricos'
-    },
-    {
-      name: 'NOVIX CRM',
-      logo: '/logos/novix.png',
-      description: 'CRM completo para força de vendas de transportadoras.',
-      color: COLORS.lime,
-      highlight: 'Software Especializado para Logística'
     }
   ]
 
   const stats = [
     { value: '6 Anos', label: 'De Experiência' },
-    { value: '4', label: 'Marcas' },
+    { value: '500+', label: 'Pontos de Entrega' },
     { value: '100+', label: 'Clientes Satisfeitos' },
     { value: '1', label: 'Sede em Vila do Conde' }
   ]
@@ -392,9 +368,9 @@ function App() {
             Soluções inovadoras para diferentes setores do mercado
           </Typography>
 
-          <Grid container spacing={4}>
-            {companies.map((company, index) => (
-              <Grid item xs={12} sm={6} md={3} key={company.name}>
+          <Grid container spacing={4} justifyContent="center">
+            {companies.map((company) => (
+              <Grid item xs={12} sm={8} md={5} lg={4} key={company.name}>
                 <Card 
                   className="company-card"
                   sx={{ 
@@ -419,20 +395,7 @@ function App() {
                       alignItems: 'center',
                       justifyContent: 'center',
                       p: 4,
-                      background: (() => {
-                        switch(company.name) {
-                          case 'LOGNOW':
-                            return `linear-gradient(135deg, ${COLORS.cardNavy} 0%, ${COLORS.navy} 100%)`;
-                          case 'SHIPPIX':
-                            return COLORS.novixBg;
-                          case 'SOUESPIRITA':
-                            return COLORS.white;
-                          case 'NOVIX CRM':
-                            return `linear-gradient(135deg, ${COLORS.cardNavy} 0%, ${COLORS.navy} 100%)`;
-                          default:
-                            return COLORS.novixBg;
-                        }
-                      })(),
+                      background: COLORS.white,
                       '&::after': {
                         content: '""',
                         position: 'absolute',
