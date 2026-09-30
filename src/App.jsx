@@ -17,9 +17,9 @@ import PhoneIcon from '@mui/icons-material/Phone'
 import EmailIcon from '@mui/icons-material/Email'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
-import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined'
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined'
 import OpenInNewIcon from '@mui/icons-material/OpenInNew'
+import StarRoundedIcon from '@mui/icons-material/StarRounded'
 
 /* ------------------------------------------------------------------ */
 /* Tema                                                                */
@@ -75,27 +75,63 @@ const CONTACT = {
   emailHref: 'mailto:atendimento@plataformaconcreta.pt'
 }
 
-const STATS = [
-  { value: '6 Anos', label: 'De experiência' },
-  { value: '500+', label: 'Pontos de entrega' },
-  { value: '100+', label: 'Clientes satisfeitos' },
-  { value: '1', label: 'Sede em Vila do Conde' }
-]
+const FOUNDED_YEAR = 2019
+const YEARS_ACTIVE = new Date().getFullYear() - FOUNDED_YEAR
 
 const BRANDS = [
   {
+    id: 'lognow',
     name: 'LOGNOW',
-    tagline: 'Intelligent Logistics',
+    tagline: 'Logística & Fulfillment',
+    short: 'Fulfillment, Conecta e Rede LogNow para quem vende online.',
     logo: '/logos/lognow.png',
+    website: 'https://lognow.pt',
+    websiteLabel: 'Visitar lognow.pt',
     description:
-      'Rentabilize o seu Negócio com Serviços de Envio. Torne-se um Revendedor Autorizado de Serviços CTT, GLS e VASP.',
-    highlight: 'Mais de 500 pontos de entrega em Portugal',
-    partners: ['CTT', 'GLS', 'VASP'],
+      'O fulfillment mais tecnológico de Portugal. Loja online, fulfillment e Conecta numa só plataforma: a operação logística com maior capacidade e tecnologia do mercado português, com entrega rápida em todo o país.',
+    services: [
+      'Fulfillment: guardamos, embalamos e enviamos, com integração automática com os principais marketplaces',
+      'Conecta: envios com preços especiais para quem guarda e prepara os produtos na sua loja ou armazém',
+      'Rede LogNow: publica uma vez e a rede de distribuição europeia vende por si, com armazém, expedição e cobrança incluídos'
+    ],
+    partnersLabel: 'Marketplaces',
+    partners: ['Amazon', 'FNAC', 'Worten'],
     cta: {
-      label: 'Quero ser revendedor',
-      href: `${CONTACT.emailHref}?subject=${encodeURIComponent('Revendedor Autorizado Lognow')}`
+      label: 'Pedir proposta',
+      href: `${CONTACT.emailHref}?subject=${encodeURIComponent('Proposta Lognow - Logística e Fulfillment')}`
+    }
+  },
+  {
+    id: 'logicpro',
+    name: 'LogicPro',
+    tagline: 'Catálogo B2B Premium',
+    badge: 'Caso de sucesso',
+    short: 'Perfumaria e cosmética premium para profissionais.',
+    logo: '/logos/logicpro.png',
+    website: 'https://logicpro.lognow.pt',
+    note: 'Marca criada pelo Grupo Plataforma Concreta e operada em regime de concessão.',
+    description:
+      'Stock premium de perfumaria e cosmética para profissionais. CHANEL, DIOR, LA MER, TOM FORD e mais 17 marcas de topo, com portes grátis, sem mínimos de encomenda e preços reservados a cada cliente.',
+    services: [
+      'Portes grátis em todas as encomendas, sem mínimos',
+      'Catálogo privado, com acesso por convite e preços nunca expostos publicamente',
+      'Stock real, origem garantida e fatura legal, com resposta ao pedido em 24h úteis'
+    ],
+    partnersLabel: 'No catálogo',
+    partners: ['CHANEL', 'DIOR', 'LA MER', 'TOM FORD', '+17 marcas'],
+    cta: {
+      label: 'Pedir acesso ao catálogo',
+      href: 'https://logicpro.lognow.pt/',
+      external: true
     }
   }
+]
+
+const STATS = [
+  { value: `${YEARS_ACTIVE} Anos`, label: 'De experiência' },
+  { value: `${BRANDS.length}`, label: 'Marcas' },
+  { value: '100+', label: 'Clientes satisfeitos' },
+  { value: '1', label: 'Sede em Vila do Conde' }
 ]
 
 const LEGAL_LINKS = [
@@ -318,7 +354,7 @@ function Header() {
   )
 }
 
-function BrandSpotlight({ brand }) {
+function BrandSpotlight({ brands }) {
   return (
     <Box sx={{ position: 'relative' }}>
       <Box
@@ -343,37 +379,50 @@ function BrandSpotlight({ brand }) {
           backdropFilter: 'blur(10px)'
         }}
       >
-        <Eyebrow light>Marca do grupo</Eyebrow>
-        <Box
-          sx={{
-            bgcolor: '#FFFFFF',
-            borderRadius: 3,
-            px: 4,
-            py: 5,
-            display: 'flex',
-            justifyContent: 'center',
-            mb: 3
-          }}
-        >
-          <Box component="img" src={brand.logo} alt={brand.name} sx={{ width: '100%', maxWidth: 280, height: 'auto' }} />
-        </Box>
-        <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 2.5 }}>
-          <LocalShippingOutlinedIcon sx={{ color: LIME }} />
-          <Typography sx={{ fontWeight: 600 }}>{brand.highlight}</Typography>
-        </Stack>
-        <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap" useFlexGap>
-          <Typography sx={{ fontSize: '0.85rem', opacity: 0.75, mr: 0.5 }}>Revendedor autorizado</Typography>
-          {brand.partners.map((partner) => (
-            <Chip
-              key={partner}
-              label={partner}
-              size="small"
+        <Eyebrow light>Marcas do grupo</Eyebrow>
+        <Stack spacing={2}>
+          {brands.map((brand) => (
+            <Box
+              key={brand.id}
+              component="a"
+              href={`#marca-${brand.id}`}
               sx={{
-                bgcolor: 'rgba(255,255,255,0.10)',
-                color: '#FFFFFF',
-                border: '1px solid rgba(255,255,255,0.2)'
+                display: 'flex',
+                alignItems: 'center',
+                gap: 2.5,
+                p: 2,
+                borderRadius: 3,
+                bgcolor: '#FFFFFF',
+                textDecoration: 'none',
+                color: 'text.primary',
+                transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+                '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 18px 40px -20px rgba(0,0,0,0.6)' }
               }}
-            />
+            >
+              <Box
+                sx={{
+                  width: 136,
+                  height: 56,
+                  flexShrink: 0,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <Box
+                  component="img"
+                  src={brand.logo}
+                  alt={brand.name}
+                  sx={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto' }}
+                />
+              </Box>
+              <Box sx={{ minWidth: 0 }}>
+                <Typography sx={{ fontWeight: 700, color: 'primary.main', lineHeight: 1.2 }}>{brand.tagline}</Typography>
+                <Typography sx={{ fontSize: '0.85rem', color: 'text.secondary', mt: 0.5, lineHeight: 1.4 }}>
+                  {brand.short}
+                </Typography>
+              </Box>
+            </Box>
           ))}
         </Stack>
       </Paper>
@@ -447,7 +496,7 @@ function Hero() {
                 mb: 5
               }}
             >
-              Construindo o futuro desde 2019, com soluções de logística e tecnologia para empresas em todo o país.
+              Construindo o futuro desde 2019, com logística, fulfillment e comércio B2B para negócios que vendem online em todo o país.
             </Typography>
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} className="rise rise-3">
               <Button href="#marcas" variant="contained" color="secondary" size="large" endIcon={<ArrowForwardIcon />}>
@@ -468,7 +517,7 @@ function Hero() {
             </Stack>
           </Grid>
           <Grid item xs={12} md={5} sx={{ display: { xs: 'none', md: 'block' } }} className="rise rise-4">
-            <BrandSpotlight brand={BRANDS[0]} />
+            <BrandSpotlight brands={BRANDS} />
           </Grid>
         </Grid>
       </Container>
@@ -526,20 +575,23 @@ function Stats() {
   )
 }
 
-function BrandCard({ brand }) {
+function BrandCard({ brand, reverse = false }) {
+  const line = `1px solid ${LINE}`
   return (
     <Paper
+      id={`marca-${brand.id}`}
       elevation={0}
       sx={{
+        scrollMarginTop: 96,
         borderRadius: 5,
-        border: `1px solid ${LINE}`,
+        border: line,
         overflow: 'hidden',
         bgcolor: '#FFFFFF',
         transition: 'box-shadow 0.3s ease, transform 0.3s ease',
         '&:hover': { boxShadow: '0 30px 70px -30px rgba(0,27,61,0.4)', transform: 'translateY(-4px)' }
       }}
     >
-      <Grid container>
+      <Grid container direction={{ xs: 'row', md: reverse ? 'row-reverse' : 'row' }}>
         <Grid
           item
           xs={12}
@@ -550,35 +602,82 @@ function BrandCard({ brand }) {
             alignItems: 'center',
             justifyContent: 'center',
             p: { xs: 5, md: 8 },
-            borderRight: { md: `1px solid ${LINE}` },
-            borderBottom: { xs: `1px solid ${LINE}`, md: 'none' }
+            borderRight: { md: reverse ? 'none' : line },
+            borderLeft: { md: reverse ? line : 'none' },
+            borderBottom: { xs: line, md: 'none' }
           }}
         >
-          <Box component="img" src={brand.logo} alt={`Logótipo ${brand.name}`} sx={{ width: '100%', maxWidth: 340, height: 'auto' }} />
+          <Box
+            component="img"
+            src={brand.logo}
+            alt={`Logótipo ${brand.name}`}
+            sx={{ width: '100%', maxWidth: 340, height: 'auto' }}
+          />
         </Grid>
         <Grid item xs={12} md={7} sx={{ p: { xs: 4, md: 6 } }}>
-          <Stack direction="row" spacing={1.5} alignItems="center" flexWrap="wrap" useFlexGap sx={{ mb: 2 }}>
+          <Stack direction="row" spacing={1.5} alignItems="center" flexWrap="wrap" useFlexGap sx={{ mb: brand.note ? 1 : 2 }}>
             <Typography variant="h3" component="h3" sx={{ fontSize: { xs: '1.6rem', md: '1.9rem' }, color: 'primary.main' }}>
               {brand.name}
             </Typography>
             <Chip label={brand.tagline} size="small" color="secondary" />
+            {brand.badge && (
+              <Chip
+                icon={<StarRoundedIcon />}
+                label={brand.badge}
+                size="small"
+                sx={{
+                  bgcolor: 'rgba(197,217,45,0.16)',
+                  color: 'primary.main',
+                  border: '1px solid rgba(197,217,45,0.6)',
+                  '& .MuiChip-icon': { color: 'secondary.dark' }
+                }}
+              />
+            )}
           </Stack>
+          {brand.note && (
+            <Typography sx={{ color: 'text.secondary', fontSize: '0.9rem', mb: 2 }}>{brand.note}</Typography>
+          )}
           <Typography sx={{ color: 'text.secondary', fontSize: '1.05rem', lineHeight: 1.75, mb: 3 }}>
             {brand.description}
           </Typography>
-          <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 3 }}>
-            <CheckCircleOutlineIcon sx={{ color: 'secondary.dark' }} />
-            <Typography sx={{ fontWeight: 600 }}>{brand.highlight}</Typography>
+          <Stack spacing={1.25} sx={{ mb: 3 }}>
+            {brand.services.map((service) => (
+              <Stack key={service} direction="row" spacing={1.5} alignItems="flex-start">
+                <CheckCircleOutlineIcon sx={{ color: 'secondary.dark', mt: '2px' }} />
+                <Typography sx={{ fontWeight: 600 }}>{service}</Typography>
+              </Stack>
+            ))}
           </Stack>
           <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap" useFlexGap sx={{ mb: 4 }}>
-            <Typography sx={{ color: 'text.secondary', fontWeight: 500, mr: 0.5 }}>Revendedor autorizado</Typography>
+            <Typography sx={{ color: 'text.secondary', fontWeight: 500, mr: 0.5 }}>{brand.partnersLabel}</Typography>
             {brand.partners.map((partner) => (
               <Chip key={partner} label={partner} variant="outlined" sx={{ borderColor: LINE, color: 'primary.main' }} />
             ))}
           </Stack>
-          <Button href={brand.cta.href} variant="contained" color="primary" endIcon={<ArrowForwardIcon />}>
-            {brand.cta.label}
-          </Button>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
+            <Button
+              href={brand.cta.href}
+              target={brand.cta.external ? '_blank' : undefined}
+              rel={brand.cta.external ? 'noopener noreferrer' : undefined}
+              variant="contained"
+              color="primary"
+              endIcon={brand.cta.external ? <OpenInNewIcon sx={{ fontSize: 16 }} /> : <ArrowForwardIcon />}
+            >
+              {brand.cta.label}
+            </Button>
+            {brand.websiteLabel && (
+              <Button
+                href={brand.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="outlined"
+                color="primary"
+                endIcon={<OpenInNewIcon sx={{ fontSize: 16 }} />}
+              >
+                {brand.websiteLabel}
+              </Button>
+            )}
+          </Stack>
         </Grid>
       </Grid>
     </Paper>
@@ -599,8 +698,8 @@ function Brands() {
           </Typography>
         </Box>
         <Stack spacing={4}>
-          {BRANDS.map((brand) => (
-            <BrandCard key={brand.name} brand={brand} />
+          {BRANDS.map((brand, index) => (
+            <BrandCard key={brand.id} brand={brand} reverse={index % 2 === 1} />
           ))}
         </Stack>
       </Container>
